@@ -1,6 +1,7 @@
 package addressBookSystem;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class AddressBook {
@@ -38,6 +39,46 @@ public class AddressBook {
 	     System.out.println("Contact added successfully.");
 	}
 	
+	public boolean editContact(String firstName, String lastName) {
+	     Optional<Contact> contactOpt = contacts.stream()
+	    		 .filter(contact -> contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName))
+	             .findFirst();
+
+	     if (contactOpt.isPresent()) {
+	    	 Contact contact = contactOpt.get();
+	         Scanner scanner = new Scanner(System.in);
+
+	         System.out.println("Editing contact: " + contact);
+	         System.out.print("Enter new Address: ");
+	         contact.setAddress(scanner.nextLine());
+	         System.out.print("Enter new City: ");
+	         contact.setCity(scanner.nextLine());
+	         System.out.print("Enter new State: ");
+	         contact.setState(scanner.nextLine());
+	         System.out.print("Enter new Zip: ");
+	         contact.setZip(scanner.nextLine());
+	         System.out.print("Enter new Phone Number: ");
+	         contact.setPhoneNumber(scanner.nextLine());
+	         System.out.print("Enter new Email: ");
+	         contact.setEmail(scanner.nextLine());
+
+	         System.out.println("Contact updated successfully.");
+	         return true;
+	     } else {
+	         System.out.println("Contact not found.");
+	         return false;
+	     }
+	 }
+	 
+	 private static void editContact() {
+	        System.out.print("Enter First Name of the contact to edit: ");
+	        String firstName = sc.nextLine();
+	        System.out.print("Enter Last Name of the contact to edit: ");
+	        String lastName = sc.nextLine();
+
+	        addressBook.editContact(firstName, lastName);
+	    }
+	
 	public void printContacts() {
 		System.out.println("---------------------");
 		for(Contact contact: contacts) {
@@ -51,9 +92,10 @@ public class AddressBook {
 		System.out.println("Welcome to Address Book System Program");		
 		
 		while (true) {
-            System.out.println("1. Add New Contact");
+			System.out.println("1. Add New Contact");
             System.out.println("2. Display Contacts");
-            System.out.println("3. Exit");
+            System.out.println("3. Edit Contact");
+            System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine(); 
@@ -66,6 +108,9 @@ public class AddressBook {
                     addressBook.printContacts();
                     break;
                 case 3:
+                    editContact();
+                    break;
+                case 4:
                     System.out.println("Exiting...");
                     return;
                 default:
