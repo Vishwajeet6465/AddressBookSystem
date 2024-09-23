@@ -20,7 +20,7 @@ public class AddressBook {
 		
 		AddressBook addressBook = new AddressBook();
 		
-		//Enter details with following flow ==> FirstName,LastName,Address,city,state,pin,mob,mail
+		//Enter details with following flow ==> FirstName, LastName, Address,city, state, pin, mob, mail
 		Contact contact = new Contact("Vishwajeet","Bamane","Talegaon Dabhade","Pune","Maharastra","410507","9999999999","vb@email.com");
 		addressBook.addContacts(contact);
 		addressBook.printContacts();
