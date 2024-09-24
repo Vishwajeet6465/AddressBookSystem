@@ -18,26 +18,37 @@ public class AddressBook {
 	}
 	
 	private static void addNewContact() {
-		 System.out.print("Enter First Name: ");
-	     String firstName = sc.nextLine();
-	     System.out.print("Enter Last Name: ");
-	     String lastName = sc.nextLine();
-	     System.out.print("Enter Address: ");
-	     String address = sc.nextLine();
-	     System.out.print("Enter City: ");
-	     String city = sc.nextLine();
-	     System.out.print("Enter State: ");
-	     String state = sc.nextLine();
-	     System.out.print("Enter Zip: ");
-	     String zip = sc.nextLine();
-	     System.out.print("Enter Phone Number: ");
-	     String phone = sc.nextLine();
-	     System.out.print("Enter Email: ");
-	     String email = sc.nextLine();
+		
+		while(true) {
+			 System.out.print("Enter First Name: ");
+		     String firstName = sc.nextLine();
+		     System.out.print("Enter Last Name: ");
+		     String lastName = sc.nextLine();
+		     System.out.print("Enter Address: ");
+		     String address = sc.nextLine();
+		     System.out.print("Enter City: ");
+		     String city = sc.nextLine();
+		     System.out.print("Enter State: ");
+		     String state = sc.nextLine();
+		     System.out.print("Enter Zip: ");
+		     String zip = sc.nextLine();
+		     System.out.print("Enter Phone Number: ");
+		     String phone = sc.nextLine();
+		     System.out.print("Enter Email: ");
+		     String email = sc.nextLine();
+	
+		     Contact contact = new Contact(firstName, lastName, address, city, state, zip, phone, email);
+		     addressBook.addContacts(contact);
+		     System.out.println("Contact added successfully.");
+		     
+		     System.out.print("Do you want to add another contact? (yes/no): ");
+	         String response = sc.nextLine();
+	         if (!response.equalsIgnoreCase("yes")) {
+	             break;
+	         }
+         
+		}
 
-	     Contact contact = new Contact(firstName, lastName, address, city, state, zip, phone, email);
-	     addressBook.addContacts(contact);
-	     System.out.println("Contact added successfully.");
 	}
 	
 	public boolean editContact(String firstName, String lastName) {
