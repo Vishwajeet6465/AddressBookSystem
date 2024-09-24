@@ -1,5 +1,6 @@
 package addressBookSystem;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -46,21 +47,20 @@ public class AddressBook {
 
 	     if (contactOpt.isPresent()) {
 	    	 Contact contact = contactOpt.get();
-	         Scanner scanner = new Scanner(System.in);
 
 	         System.out.println("Editing contact: " + contact);
 	         System.out.print("Enter new Address: ");
-	         contact.setAddress(scanner.nextLine());
+	         contact.setAddress(sc.nextLine());
 	         System.out.print("Enter new City: ");
-	         contact.setCity(scanner.nextLine());
+	         contact.setCity(sc.nextLine());
 	         System.out.print("Enter new State: ");
-	         contact.setState(scanner.nextLine());
+	         contact.setState(sc.nextLine());
 	         System.out.print("Enter new Zip: ");
-	         contact.setZip(scanner.nextLine());
+	         contact.setZip(sc.nextLine());
 	         System.out.print("Enter new Phone Number: ");
-	         contact.setPhoneNumber(scanner.nextLine());
+	         contact.setPhoneNumber(sc.nextLine());
 	         System.out.print("Enter new Email: ");
-	         contact.setEmail(scanner.nextLine());
+	         contact.setEmail(sc.nextLine());
 
 	         System.out.println("Contact updated successfully.");
 	         return true;
@@ -70,14 +70,37 @@ public class AddressBook {
 	     }
 	 }
 	 
-	 private static void editContact() {
+	private static void editContact() {
 	        System.out.print("Enter First Name of the contact to edit: ");
 	        String firstName = sc.nextLine();
 	        System.out.print("Enter Last Name of the contact to edit: ");
 	        String lastName = sc.nextLine();
 
 	        addressBook.editContact(firstName, lastName);
-	    }
+	}
+	
+	public boolean deleteContact(String firstName, String lastName) {
+		 Iterator<Contact> iterator = contacts.iterator();
+	     while (iterator.hasNext()) {
+	     Contact contact = iterator.next();
+	        if (contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName)) {
+	            iterator.remove();
+	        System.out.println("Contact deleted successfully.");
+	        return true;
+	        }
+	     }
+	     System.out.println("Contact not found.");
+	     return false;
+	 }
+	 
+	 private static void deleteContact() {
+	        System.out.print("Enter First Name of the contact to delete: ");
+	        String firstName = sc.nextLine();
+	        System.out.print("Enter Last Name of the contact to delete: ");
+	        String lastName = sc.nextLine();
+
+	        addressBook.deleteContact(firstName, lastName);
+	    } 
 	
 	public void printContacts() {
 		System.out.println("---------------------");
@@ -95,7 +118,8 @@ public class AddressBook {
 			System.out.println("1. Add New Contact");
             System.out.println("2. Display Contacts");
             System.out.println("3. Edit Contact");
-            System.out.println("4. Exit");
+            System.out.println("4. Delete Contact");
+            System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine(); 
@@ -111,7 +135,10 @@ public class AddressBook {
                     editContact();
                     break;
                 case 4:
-                    System.out.println("Exiting...");
+                    deleteContact();
+                    break;
+                case 5:
+                    System.out.println("Exited Succesfully..");
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
