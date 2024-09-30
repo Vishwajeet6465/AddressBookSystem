@@ -1,5 +1,5 @@
 package addressBookSystem;
-
+import java.util.*;
 
 class Contact {
 	
@@ -87,6 +87,19 @@ class Contact {
 
 	public void setEmail(String mail) {
 		this.mail = mail;
+	}
+	
+	public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact contact = (Contact) o;
+        return firstName.equals(contact.firstName) &&
+               lastName.equals(contact.lastName);
+    }
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(firstName,lastName);
 	}
 
 	@Override
